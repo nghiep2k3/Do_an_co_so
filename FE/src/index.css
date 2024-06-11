@@ -18,3 +18,12 @@ code {
   padding: 0;
   box-sizing: border-box;
 }
+
+[data-aos] {
+  opacity: 0;
+  transition-property: transform, opacity;
+}
+
+[data-aos].aos-animate {
+  opacity: 1;
+}

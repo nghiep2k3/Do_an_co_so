@@ -1,30 +1,29 @@
-import React, { useState, useEffect } from 'react';
-import './Test.css'; 
+import React, { useEffect } from 'react';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
-const Test = () => {
-  const [sticky, setSticky] = useState(false);
-
-  const handleScroll = () => {
-    if (window.scrollY > 101) {
-        console.log(window.scrollY);
-      setSticky(true);
-    } else {
-      setSticky(false);
-    }
-  };
+const App = () => {
+  useEffect(() => {
+    AOS.init({
+      offset: 200,
+      delay: 0,
+      duration: 1000,
+      easing: 'ease-in-out',
+    });
+  }, []); // Chỉ gọi một lần khi component mount
 
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
+    AOS.refresh();
+    console.log('ok');
+  });
 
   return (
-    <header className={sticky ? 'header sticky' : ''}>
-      <h1>My Header</h1>
-    </header>
+    <div>
+      <h1 data-aos="fade-up">Hello, world!</h1>
+      <p data-aos="fade-left">This is an animated paragraph.</p>
+      {/* Thêm các phần tử khác với data-aos */}
+    </div>
   );
 };
 
-export default Test;
+export default App;
