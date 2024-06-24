@@ -13,7 +13,7 @@ function App() {
       <Header></Header>
       <Carousel></Carousel>
       <Cart></Cart>
-      {/* <Login></Login> */}
+      <Login></Login>
       {/* <Test></Test> */}
     </div>
   );
