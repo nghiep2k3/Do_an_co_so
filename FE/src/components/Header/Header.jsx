@@ -101,18 +101,20 @@ export default function Header() {
 
           <div className={styles.Bottom_Navbar}>
             <div className={styles.nav_container}>
-              <div className={styles.nav_item}>Trang chủ</div>
+              <div className={styles.nav_item}><Link to='/'>Trang chủ</Link></div>
               <div
                 className={styles.nav_item}
                 onMouseEnter={() => toggleSubNav('laptop', true)}
                 onMouseLeave={() => toggleSubNav('laptop', false)}
               >
-                Laptop
+                <Link to='/Laptop'>Laptop</Link>
                 {showSubNav.laptop && (
                   <div className={styles.sub_nav}>
-                    <div className={styles.sub_nav_item}>MacBook</div>
-                    <div className={styles.sub_nav_item}>Dell</div>
-                    <div className={styles.sub_nav_item}>HP</div>
+                    <div className={styles.sub_nav_item}>
+                      <Link to='/macbook'>MacBook</Link>
+                      </div>
+                    <div className={styles.sub_nav_item}><Link to='/dell'>Dell</Link></div>
+                    <div className={styles.sub_nav_item}><Link to='/hp'>HP</Link></div>
                   </div>
                 )}
               </div>
@@ -121,12 +123,12 @@ export default function Header() {
                 onMouseEnter={() => toggleSubNav('phone', true)}
                 onMouseLeave={() => toggleSubNav('phone', false)}
               >
-                Điện thoại
+                <Link to='/phone'>Điện thoại</Link>
                 {showSubNav.phone && (
                   <div className={styles.sub_nav}>
-                    <div className={styles.sub_nav_item}>iPhone</div>
-                    <div className={styles.sub_nav_item}>Samsung</div>
-                    <div className={styles.sub_nav_item}>Xiaomi</div>
+                    <div className={styles.sub_nav_item}><Link to='/ip'>IPhone</Link></div>
+                    <div className={styles.sub_nav_item}><Link to='/samsung'>Samsung</Link></div>
+                    <div className={styles.sub_nav_item}><Link to='/xiaomi'>Xiaomi</Link></div>
                   </div>
                 )}
               </div>
@@ -135,17 +137,17 @@ export default function Header() {
                 onMouseEnter={() => toggleSubNav('accessories', true)}
                 onMouseLeave={() => toggleSubNav('accessories', false)}
               >
-                Phụ kiện
+                <Link to='macbook'>Phụ kiện</Link>
                 {showSubNav.accessories && (
                   <div className={styles.sub_nav}>
-                    <div className={styles.sub_nav_item}>Tai nghe</div>
-                    <div className={styles.sub_nav_item}>Sạc</div>
-                    <div className={styles.sub_nav_item}>Cáp</div>
+                    <div className={styles.sub_nav_item}><Link to='macbook'>Tai nghe</Link></div>
+                    <div className={styles.sub_nav_item}><Link to='macbook'>Sạc</Link></div>
+                    <div className={styles.sub_nav_item}><Link to='macbook'>Cáp</Link></div>
                   </div>
                 )}
               </div>
-              <div className={styles.nav_item}>Liên hệ</div>
-              <div className={styles.nav_item}>Hệ thống cửa hàng</div>
+              <div className={styles.nav_item}><Link to='/contact'>Liên hệ</Link></div>
+              <div className={styles.nav_item}><Link to='/shop'>Hệ thống cửa hàng</Link></div>
             </div>
           </div>
         </div>
