@@ -1,20 +1,32 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import 'animate.css/animate.min.css'; // Import CSS của Animate.css
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import "animate.css/animate.min.css";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./page/Home/Home";
+import Detail from "./components/Detail/Detail";
+import Bestsell from "./page/BestSell/Bestsell";
+import Login from "./page/Login/Login"
 
-
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <App />
+    <Router future={{ v7_startTransition: true }}>
+      <Routes>
+        <Route path="/" element={<App />}>
+          <Route index element={<Home />} />
+          <Route path="dell" element={<Detail />} />
+          <Route path="xiaomi" element={<Bestsell />} />
+        </Route>
+
+        <Route path="/login" element={<Login/>}/>
+      </Routes>
+    </Router>
   </React.StrictMode>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+
 reportWebVitals();

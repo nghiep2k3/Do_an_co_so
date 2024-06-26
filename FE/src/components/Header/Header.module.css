@@ -28,6 +28,10 @@
     margin: 0 10px;
 }
 
+.Item:hover{
+    cursor: pointer;
+}
+
 .stickydefaut {
     transition: all 1s;
     position: static;

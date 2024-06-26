@@ -1,20 +1,18 @@
 import logo from './logo.svg';
 import './App.css';
+import { useLocation } from 'react-router-dom';
 import Header from './components/Header/Header';
-import Test from './page/Test/Test'
 import Carousel from './components/Carousel/Carousel';
-import Cart from './components/Cart/Cart';
-import Login from './page/Login/Login';
-
+import { Outlet,  } from "react-router-dom";
 
 function App() {
+  const location = useLocation();
+  const hideCarousel = location.pathname === "/";
+
   return (
     <div style={{height: '5000px',}}>
-      <Header></Header>
-      <Carousel></Carousel>
-      <Cart></Cart>
-      <Login></Login>
-      {/* <Test></Test> */}
+      {!hideCarousel && <Header />}
+      <Outlet/>
     </div>
   );
 }

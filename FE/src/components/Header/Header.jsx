@@ -4,8 +4,16 @@ import { HeartOutlined, LockOutlined, PhoneOutlined, SearchOutlined, ShoppingCar
 import { Button, Dropdown, Space } from "antd";
 import Search from "antd/es/input/Search";
 import { Link } from 'react-router-dom';
+
+import Cookies from "universal-cookie";
+import { auth, db } from "../../firebase";
+const cookies = new Cookies();
+
+
 export default function Header() {
+  const [isAuth, setIsAuth] = useState(cookies.get("auth-token-nghiep"));
   const [sticky, setSticky] = useState(false);
+  const value = localStorage.getItem('user') || '0';
   const [showSubNav, setShowSubNav] = useState({ laptop: false, phone: false, accessories: false });
   const toggleSubNav = (category, state) => {
     setShowSubNav((prevState) => ({
@@ -15,10 +23,9 @@ export default function Header() {
   };
   const handleScroll = () => {
     if (window.scrollY > 350) {
-      console.log(window.scrollY);
       setSticky(true);
     } else {
-      if(window.scrollY == 0){
+      if (window.scrollY == 0) {
         setSticky(false);
       }
     }
@@ -29,8 +36,13 @@ export default function Header() {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
+  const handleLogout = () => {
+    cookies.remove("auth-token-nghiep");
+    localStorage.removeItem("user");
+    setIsAuth(false);
+  };
 
-  
+
   return (
     <div>
       <div className={`${styles.Navbar}`}>
@@ -38,7 +50,7 @@ export default function Header() {
           <div className={styles.Item}><UserOutlined />Tài khoản của tôi</div>
           <div className={styles.Item}><HeartOutlined />Danh sách yêu thích</div>
           <div className={styles.Item}><ShoppingOutlined />Thanh toán</div>
-          <div className={styles.Item}><LockOutlined />Đăng nhập</div>
+          {!isAuth || value == 0 ? (<div className={styles.Item}><LockOutlined /><Link to='/login'>Đăng nhập</Link></div>) : (<div>{value} <button style={{ background: 'transparent', border: 'none' }} onClick={handleLogout}>Logout</button></div>)}
         </div>
 
 
@@ -101,18 +113,20 @@ export default function Header() {
 
           <div className={styles.Bottom_Navbar}>
             <div className={styles.nav_container}>
-              <div className={styles.nav_item}>Trang chủ</div>
+              <div className={styles.nav_item}><Link to='/'>Trang chủ</Link></div>
               <div
                 className={styles.nav_item}
                 onMouseEnter={() => toggleSubNav('laptop', true)}
                 onMouseLeave={() => toggleSubNav('laptop', false)}
               >
-                Laptop
+                <Link to='/Laptop'>Laptop</Link>
                 {showSubNav.laptop && (
                   <div className={styles.sub_nav}>
-                    <div className={styles.sub_nav_item}>MacBook</div>
-                    <div className={styles.sub_nav_item}>Dell</div>
-                    <div className={styles.sub_nav_item}>HP</div>
+                    <div className={styles.sub_nav_item}>
+                      <Link to='/macbook'>MacBook</Link>
+                    </div>
+                    <div className={styles.sub_nav_item}><Link to='/dell'>Dell</Link></div>
+                    <div className={styles.sub_nav_item}><Link to='/hp'>HP</Link></div>
                   </div>
                 )}
               </div>
@@ -121,12 +135,12 @@ export default function Header() {
                 onMouseEnter={() => toggleSubNav('phone', true)}
                 onMouseLeave={() => toggleSubNav('phone', false)}
               >
-                Điện thoại
+                <Link to='/phone'>Điện thoại</Link>
                 {showSubNav.phone && (
                   <div className={styles.sub_nav}>
-                    <div className={styles.sub_nav_item}>iPhone</div>
-                    <div className={styles.sub_nav_item}>Samsung</div>
-                    <div className={styles.sub_nav_item}>Xiaomi</div>
+                    <div className={styles.sub_nav_item}><Link to='/ip'>IPhone</Link></div>
+                    <div className={styles.sub_nav_item}><Link to='/samsung'>Samsung</Link></div>
+                    <div className={styles.sub_nav_item}><Link to='/xiaomi'>Xiaomi</Link></div>
                   </div>
                 )}
               </div>
@@ -135,17 +149,17 @@ export default function Header() {
                 onMouseEnter={() => toggleSubNav('accessories', true)}
                 onMouseLeave={() => toggleSubNav('accessories', false)}
               >
-                Phụ kiện
+                <Link to='macbook'>Phụ kiện</Link>
                 {showSubNav.accessories && (
                   <div className={styles.sub_nav}>
-                    <div className={styles.sub_nav_item}>Tai nghe</div>
-                    <div className={styles.sub_nav_item}>Sạc</div>
-                    <div className={styles.sub_nav_item}>Cáp</div>
+                    <div className={styles.sub_nav_item}><Link to='macbook'>Tai nghe</Link></div>
+                    <div className={styles.sub_nav_item}><Link to='macbook'>Sạc</Link></div>
+                    <div className={styles.sub_nav_item}><Link to='macbook'>Cáp</Link></div>
                   </div>
                 )}
               </div>
-              <div className={styles.nav_item}>Liên hệ</div>
-              <div className={styles.nav_item}>Hệ thống cửa hàng</div>
+              <div className={styles.nav_item}><Link to='/contact'>Liên hệ</Link></div>
+              <div className={styles.nav_item}><Link to='/shop'>Hệ thống cửa hàng</Link></div>
             </div>
           </div>
         </div>
