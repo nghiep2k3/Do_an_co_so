@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import * as Components from './LoginStyles';
 import { GoogleOutlined } from '@ant-design/icons';
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
 import { signInWithPopup } from "firebase/auth";
 import { auth, provider } from "../../firebase";
 import Cookies from "universal-cookie";
+import axios from 'axios';
 
 function Login() {
     const navigate = useNavigate();
@@ -14,10 +15,31 @@ function Login() {
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
 
-    const handleSignIn = () => {
-        console.log('Email:', email);
-        console.log('Password:', password);
-        navigate("/xiaomi");
+    const handleSignIn = async () => {
+        const loginData = {
+            username: email,
+            password: password
+        };
+
+        try {
+            const response = await axios.post('https://trandai03.online/api/v1/auth/login', loginData, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            console.log(22222, response.data);
+            navigate("/xiaomi");
+        } catch (error) {
+            if (error.response) {
+                // Lỗi nhận từ phía máy chủ
+                setError(error.response.data);
+                console.error('Có lỗi xảy ra:', error.response.data);
+            } else {
+                // Lỗi không liên quan đến máy chủ (VD: không thể kết nối)
+                setError('Không thể kết nối tới máy chủ');
+                console.error('Có lỗi xảy ra:', error.message);
+            }
+        }
     };
 
     const validateEmail = (email) => {
@@ -27,12 +49,14 @@ function Login() {
 
     const handleButtonClick = (event) => {
         event.preventDefault();
-        if (validateEmail(email)) {
-            setError('');
-            handleSignIn();
-        } else {
-            setError('Email không hợp lệ');
-        }
+        handleSignIn();
+
+        // if (validateEmail(email)) {
+        //     setError('');
+        //     // handleSignIn();
+        // } else {
+        //     setError('Email không hợp lệ');
+        // }
     };
 
     const signInWithGoogle = async () => {
@@ -41,15 +65,11 @@ function Login() {
             cookies.set("auth-token-nghiep", result.user.refreshToken);
             console.log(result.user.displayName);
             localStorage.setItem('user', result.user.displayName);
-            //   console.log(result);
             navigate('/xiaomi');
-
         } catch (err) {
             console.error(err);
         }
     };
-
-    
 
     return (
         <div style={{ display: "flex", justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
@@ -84,13 +104,13 @@ function Login() {
                         {error && <p style={{ color: 'red' }}>{error}</p>}
                         <div style={{ display: 'flex', alignItems: 'center', marginTop: 15 }}>
                             <div style={{ height: 30, width: 30 }} onClick={signInWithGoogle}>
-                                <img style={{ width: '100%',cursor: 'pointer' }} src="https://i.pinimg.com/originals/74/65/f3/7465f30319191e2729668875e7a557f2.png" />
+                                <img style={{ width: '100%', cursor: 'pointer' }} src="https://i.pinimg.com/originals/74/65/f3/7465f30319191e2729668875e7a557f2.png" />
                             </div>
                             <div style={{ height: 30, width: 30, margin: '0 20px' }}>
-                                <img style={{ width: '100%',cursor: 'pointer' }} src="https://mewxu.net/wp-content/uploads/2017/03/fb_icon.png" />
+                                <img style={{ width: '100%', cursor: 'pointer' }} src="https://mewxu.net/wp-content/uploads/2017/03/fb_icon.png" />
                             </div>
                             <div style={{ height: 30, width: 30 }}>
-                                <img style={{ width: '100%',cursor: 'pointer' }} src="https://upload.wikimedia.org/wikipedia/commons/c/c2/GitHub_Invertocat_Logo.svg" />
+                                <img style={{ width: '100%', cursor: 'pointer' }} src="https://upload.wikimedia.org/wikipedia/commons/c/c2/GitHub_Invertocat_Logo.svg" />
                             </div>
                         </div>
 

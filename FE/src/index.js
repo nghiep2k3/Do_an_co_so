@@ -10,6 +10,7 @@ import Home from "./page/Home/Home";
 import Detail from "./components/Detail/Detail";
 import Bestsell from "./page/BestSell/Bestsell";
 import Login from "./page/Login/Login"
+import Test from "./page/Test/Test"
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -23,6 +24,7 @@ root.render(
         </Route>
 
         <Route path="/login" element={<Login/>}/>
+        <Route path="/test" element={<Test/>}/>
       </Routes>
     </Router>
   </React.StrictMode>

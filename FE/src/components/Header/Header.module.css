@@ -1,22 +1,25 @@
-/* src/Header.module.css */
-.Navbar {
-    background-color: white;
-    color: white;
+/* Test.module.css */
+.header {
     width: 100%;
-    /* position: relative; */
-}
-
-.First_Navbar {
-    transition: all 1s;
+    position: sticky;
+    top: 0;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    transition: all 2s ease-in-out;
+  }
+  
+  .First_Navbar {
+    transition: all 1s ease-in-out;
     background-color: black;
     color: white;
     display: flex;
     height: 35px;
     align-items: center;
     justify-content: end;
-}
-
-.Item {
+  }
+  
+  .Item {
     width: 100%;
     display: flex;
     align-items: center;
@@ -26,22 +29,21 @@
     max-width: 142px;
     text-align: center;
     margin: 0 10px;
-}
-
-.Item:hover{
+  }
+  .Item:hover{
     cursor: pointer;
-}
-
-.stickydefaut {
-    transition: all 1s;
+  }
+  
+  .stickydefaut {
+    transition: all 1s ease-in-out;
     position: static;
     top: 0;
     left: 0;
     width: 100%;
     z-index: 1000;
-}
-
-.sticky {
+  }
+  
+  .sticky {
     transition: all 1s;
     position: fixed;
     animation: slideDown 0.5s forwards;
@@ -49,20 +51,20 @@
     left: 0;
     width: 100%;
     z-index: 1000;
-}
-
-@keyframes slideDown {
+  }
+  
+  @keyframes slideDown {
     from {
         transform: translateY(-100%);
     }
-
+  
     to {
         transform: translateY(0);
     }
-}
-
-
-.Mid_Navbar {
+  }
+  
+  
+  .Mid_Navbar {
     display: flex;
     align-items: center;
     color: black;
@@ -71,22 +73,22 @@
     background-color: white;
     border-bottom: 1px solid #ddd;
     padding: 10px 0;
-}
-
-.Bottom_Navbar {
+  }
+  
+  .Bottom_Navbar {
     background-color: white;
     /* padding: 5px 0; */
     z-index: 999;
     background-color: white;
     border-bottom: 1px solid #ddd;
-}
-
-.search_container {
+  }
+  
+  .search_container {
     display: flex;
     align-items: center;
-}
-
-.search_input {
+  }
+  
+  .search_input {
     height: 46px;
     min-width: 400px;
     padding: 0 20px;
@@ -94,9 +96,9 @@
     border-radius: 23px 0 0 23px;
     outline: none;
     flex: 1;
-}
-
-.search_button {
+  }
+  
+  .search_button {
     height: 46px;
     padding: 0 20px;
     border: none;
@@ -105,26 +107,26 @@
     border-radius: 0 23px 23px 0;
     cursor: pointer;
     outline: none;
-}
-
-.search_button:hover {
+  }
+  
+  .search_button:hover {
     background-color: #40a9ff;
-}
-
-.Reverse {
+  }
+  
+  .Reverse {
     transform: scaleX(-1);
-}
-
-.nav_container {
+  }
+  
+  .nav_container {
     display: flex;
     font-weight: 600;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
     gap: 20px;
-}
-
-.nav_item {
+  }
+  
+  .nav_item {
     color: black;
     padding: 10px 15px;
     text-align: center;
@@ -132,15 +134,15 @@
     margin: 0 20px;
     cursor: pointer;
     white-space: nowrap;
-}
-
-.nav_item:hover {
+  }
+  
+  .nav_item:hover {
     transition: all 1s;
     background-color: #444;
     color: white;
-}
-
-.sub_nav {
+  }
+  
+  .sub_nav {
     position: absolute;
     top: 100%;
     left: 0;
@@ -149,15 +151,16 @@
     border-radius: 4px;
     overflow: hidden;
     z-index: 10;
-}
-
-.sub_nav_item {
+  }
+  
+  .sub_nav_item {
     padding: 10px 15px;
     color: #333;
     cursor: pointer;
     white-space: nowrap;
-}
-
-.sub_nav_item:hover {
+  }
+  
+  .sub_nav_item:hover {
     background-color: #f0f0f0;
-}
+  }
+  
