@@ -13,20 +13,49 @@ function Login() {
     const [signIn, toggle] = useState(true);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
+    const [inputEmail, setInputEmail] = useState("");
+    const [inputUserName, setInputUserName] = useState("");
+    const [inputPassword, setInputPassword] = useState("");
+    const [inputNumberPhone, setInputNumberPhone] = useState("");
     const [error, setError] = useState('');
+
+    const handleSignUp = async (event) => {
+        event.preventDefault();
+        const formData = {
+            username: inputUserName,
+            email: inputEmail,
+            password: inputPassword,
+            retype_password: inputPassword,
+            telephone: inputNumberPhone
+        }
+
+        console.log(2222, formData);
+        try {
+            const response = await axios.post('https://trandai03.online/api/auth/signup', formData);
+            console.log(22222, response.data);
+            navigate("/xiaomi");
+        } catch (error) {
+            if (error.response) {
+                // Lỗi nhận từ phía máy chủ
+                setError(error.response.data);
+                console.error('Có lỗi xảy ra:', error.response.data);
+            } else {
+                // Lỗi không liên quan đến máy chủ (VD: không thể kết nối)
+                setError('Không thể kết nối tới máy chủ');
+                console.error('Có lỗi xảy ra:', error.message);
+            }
+        }
+    }
 
     const handleSignIn = async () => {
         const loginData = {
-            username: email,
+            username_email: email,
             password: password
         };
 
         try {
-            const response = await axios.post('https://trandai03.online/api/v1/auth/login', loginData, {
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            });
+            const response = await axios.post('https://trandai03.online/api/auth/signin', loginData);
             console.log(22222, response.data);
             navigate("/xiaomi");
         } catch (error) {
@@ -77,10 +106,38 @@ function Login() {
                 <Components.SignUpContainer signinIn={signIn}>
                     <Components.Form>
                         <Components.Title>Create Account</Components.Title>
-                        <Components.Input type='text' placeholder='Name' />
-                        <Components.Input type='email' placeholder='Email' />
-                        <Components.Input type='password' placeholder='Password' />
-                        <Components.Button>Sign Up</Components.Button>
+                        <Components.Input
+                            type='text'
+                            value={inputUserName}
+                            onChange={(e) => setInputUserName(e.target.value)}
+                            placeholder='Username'
+                        />
+                        <Components.Input
+                            type='email'
+                            value={inputEmail}
+                            onChange={(e) => setInputEmail(e.target.value)}
+                            placeholder='Email'
+                        />
+                        <Components.Input
+                            type='text'
+                            value={inputNumberPhone}
+                            onChange={(e) => setInputNumberPhone(e.target.value)}
+                            placeholder='Số điện thoại'
+                        />
+                        <Components.Input
+                            type='password'
+                            value={inputPassword}
+                            onChange={(e) => setInputPassword(e.target.value)}
+                            placeholder='Mật khẩu'
+                        />
+                        <Components.Input
+                            type='password'
+                            value={inputPassword}
+                            onChange={(e) => setInputPassword(e.target.value)}
+                            placeholder='Nhập lại mật khẩu'
+                        />
+                        <Components.Button onClick={handleSignUp}>Sign Up</Components.Button>
+                        {error && <p style={{ color: 'red' }}>{error}</p>}
                     </Components.Form>
                 </Components.SignUpContainer>
 
