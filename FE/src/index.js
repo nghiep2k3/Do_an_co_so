@@ -10,6 +10,7 @@ import Home from "./page/Home/Home";
 import Detail from "./components/Detail/Detail";
 import Bestsell from "./page/BestSell/Bestsell";
 import Login from "./page/Login/Login"
+import Test from "./page/Test/Test"
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -18,11 +19,12 @@ root.render(
       <Routes>
         <Route path="/" element={<App />}>
           <Route index element={<Home />} />
-          <Route path="dell" element={<Detail />} />
+          <Route path="dell" />
+          <Route path="details" element={<Detail />} />
           <Route path="xiaomi" element={<Bestsell />} />
         </Route>
-
-        <Route path="/login" element={<Login/>}/>
+        <Route path="/login" element={<Login />} />
+        <Route path="/test" element={<Test />} />
       </Routes>
     </Router>
   </React.StrictMode>
