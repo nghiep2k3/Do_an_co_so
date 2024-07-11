@@ -19,12 +19,12 @@ root.render(
       <Routes>
         <Route path="/" element={<App />}>
           <Route index element={<Home />} />
-          <Route path="dell" element={<Detail />} />
+          <Route path="dell" />
+          <Route path="details" element={<Detail />} />
           <Route path="xiaomi" element={<Bestsell />} />
         </Route>
-
-        <Route path="/login" element={<Login/>}/>
-        <Route path="/test" element={<Test/>}/>
+        <Route path="/login" element={<Login />} />
+        <Route path="/test" element={<Test />} />
       </Routes>
     </Router>
   </React.StrictMode>

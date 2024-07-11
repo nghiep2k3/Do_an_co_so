@@ -19,9 +19,14 @@ function Login() {
     const [inputPassword, setInputPassword] = useState("");
     const [inputNumberPhone, setInputNumberPhone] = useState("");
     const [error, setError] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState("");
 
     const handleSignUp = async (event) => {
         event.preventDefault();
+        if (inputPassword !== confirmPassword) {
+            setError("Mật khẩu và xác nhận mật khẩu không khớp");
+            return;
+        }
         const formData = {
             username: inputUserName,
             email: inputEmail,
@@ -132,8 +137,8 @@ function Login() {
                         />
                         <Components.Input
                             type='password'
-                            value={inputPassword}
-                            onChange={(e) => setInputPassword(e.target.value)}
+                            value={confirmPassword}
+                            onChange={(e) => setConfirmPassword(e.target.value)}
                             placeholder='Nhập lại mật khẩu'
                         />
                         <Components.Button onClick={handleSignUp}>Sign Up</Components.Button>

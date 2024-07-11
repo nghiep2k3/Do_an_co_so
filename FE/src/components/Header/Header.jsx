@@ -14,6 +14,7 @@ export default function Header() {
   const [isAuth, setIsAuth] = useState(cookies.get("auth-token-nghiep"));
   const [sticky, setSticky] = useState(false);
   const value = localStorage.getItem('user') || '0';
+  const role = localStorage.getItem('role');
   const [showSubNav, setShowSubNav] = useState({ laptop: false, phone: false, accessories: false });
   const toggleSubNav = (category, state) => {
     setShowSubNav((prevState) => ({
@@ -44,6 +45,8 @@ export default function Header() {
   return (
     <div>
       <div className={`${styles.First_Navbar} animate__animated animate__fadeInDown`}>
+      {role == "admin" ? (<div className={styles.Item}><UserOutlined />Quản lý</div>):""}
+        
         <div className={styles.Item}><UserOutlined />Tài khoản của tôi</div>
         <div className={styles.Item}><HeartOutlined />Danh sách yêu thích</div>
         <div className={styles.Item}><ShoppingOutlined />Thanh toán</div>
