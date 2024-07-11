@@ -1,51 +1,59 @@
 package org.do_an.be.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
-import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
 @Entity
 @Table(name = "product")
-public class Product {
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class Product extends BaseEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 
     @Column(name = "name")
     private String name;
 
-    @Lob
-    @Column(name = "`desc`")
-    private String desc;
+//    @Lob
+//    @Column(name = "`desc`")
+//    private String desc;
 
     @Column(name = "SKU")
     private String sku;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
-    private ProductCategory category;
+    private Category category;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "inventory_id")
     private ProductInventory inventory;
 
     @Column(name = "price")
-    private Integer price;
+    private Float price;
 
     @Column(name = "discount_id")
     private Integer discountId;
 
-    @Column(name = "created_at", nullable = false)
-    private Instant createdAt;
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private List<Comment> comments = new ArrayList<>();
 
-    @Column(name = "modify_at", nullable = false)
-    private Instant modifyAt;
+    @Column(name = "description")
+    private String description;
 
-    @Column(name = "delete_at", nullable = false)
-    private Instant deleteAt;
+    @OneToMany(mappedBy = "product",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY)
+    private List<ProductImage> productImages;
 
 }

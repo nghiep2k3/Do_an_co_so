@@ -13,6 +13,7 @@ import java.time.Instant;
 @Table(name = "discount")
 public class Discount {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 
@@ -29,13 +30,6 @@ public class Discount {
     @Column(name = "active")
     private Boolean active;
 
-    @Column(name = "created_at", nullable = false)
-    private Instant createdAt;
 
-    @Column(name = "modify_at", nullable = false)
-    private Instant modifyAt;
-
-    @Column(name = "delete_at", nullable = false)
-    private Instant deleteAt;
 
 }
