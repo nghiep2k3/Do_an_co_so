@@ -22,9 +22,8 @@ root.render(
           <Route path="dell" element={<Detail />} />
           <Route path="xiaomi" element={<Bestsell />} />
         </Route>
-
-        <Route path="/login" element={<Login/>}/>
-        <Route path="/test" element={<Test/>}/>
+        <Route path="/login" element={<Login />} />
+        <Route path="/test" element={<Test />} />
       </Routes>
     </Router>
   </React.StrictMode>
